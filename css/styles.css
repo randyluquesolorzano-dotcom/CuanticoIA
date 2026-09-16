@@ -1,0 +1,343 @@
+/* =========================================================
+   ESTILOS.CSS
+   Portal "Más allá de las estrellas"
+   Maquetación 100% fluida y tradicional.
+   PROHIBIDO en este archivo: display:flex, display:grid, @media, JS.
+   Técnicas usadas: %, inline-block, float + clearfix, max-width:100%
+   ========================================================= */
+
+/* -------------------- 1. RESET LIGERO (manual, sin librerías) -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* para que % de ancho + padding no rompan la fluidez */
+}
+
+html {
+  /* base tipográfica en %, para que toda la escala tipográfica sea relativa */
+  font-size: 100%;
+}
+
+figure {
+  margin: 0; /* anula el margen por defecto del navegador (1em 40px) que rompía el ancho fluido */
+}
+
+ul, ol {
+  list-style-position: inside;
+}
+
+body {
+  font-family: "Segoe UI", Verdana, Arial, Helvetica, sans-serif; /* sans-serif legible */
+  color: #1c1f26;
+  background-color: #f4f2ec;
+  line-height: 1.6;
+  width: 100%;
+}
+
+/* -------------------- 2. UTILIDAD: CLEARFIX -------------------- */
+/* Técnica tradicional para contener floats sin flexbox/grid */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* -------------------- 3. CONTENEDOR FLUIDO -------------------- */
+/* Ancho relativo con tope máximo: fluido en pantallas pequeñas,
+   legible en pantallas grandes, sin usar media queries */
+.contenedor {
+  width: 92%;
+  max-width: 73.75em; /* ~1180px, calculado en em para escalar con la tipografía */
+  margin: 0 auto;
+}
+
+img, video, iframe {
+  max-width: 100%;   /* pieza clave de la adaptabilidad fluida en multimedia */
+  height: auto;
+  display: block;
+}
+
+/* -------------------- 4. ENCABEZADO -------------------- */
+.cabecera {
+  background-color: #10131c;
+  color: #f4f2ec;
+  padding: 2.5% 0;
+  border-bottom: 0.25em solid #d9a441;
+}
+
+.cabecera__titulo {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.cabecera__subtitulo {
+  font-size: 1em;
+  color: #d9a441;
+  font-style: italic;
+  margin-top: 0.4em;
+}
+
+/* -------------------- 5. NAVEGACIÓN FLUIDA CON INLINE-BLOCK -------------------- */
+.nav {
+  background-color: #1b2030;
+  width: 100%;
+}
+
+.nav__lista {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  font-size: 0; /* elimina el espacio en blanco entre inline-block */
+}
+
+.nav__item {
+  display: inline-block;      /* técnica fluida sin flexbox */
+  width: 12.5%;               /* 100% / 8 enlaces */
+  font-size: 1rem;            /* se restaura el tamaño de fuente aquí */
+  vertical-align: top;
+}
+
+.nav__enlace {
+  display: block;
+  color: #f4f2ec;
+  text-decoration: none;
+  padding: 0.9em 0.2em;
+  font-size: 0.78em;
+  text-align: center;
+  word-wrap: break-word; /* evita desbordes en pantallas muy angostas, sin media queries */
+  border-right: 1px solid #333a4f;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.nav__item:last-child .nav__enlace {
+  border-right: none;
+}
+
+.nav__enlace:hover,
+.nav__enlace:focus {
+  background-color: #d9a441;
+  color: #10131c;
+}
+
+/* -------------------- 6. HERO / SECCIÓN DE INICIO -------------------- */
+.hero {
+  position: relative;
+  padding: 4% 0;
+  background-color: #0d1b2e;
+  color: #f4f2ec;
+  overflow: hidden; /* contiene la imagen absoluta/float */
+}
+
+.hero__figura {
+  width: 100%;
+  margin-bottom: 1.2em;
+}
+
+.hero__texto {
+  width: 100%;
+}
+
+.hero__texto p {
+  font-size: 1.05em;
+  max-width: 48em; /* controla longitud de línea de forma fluida */
+}
+
+/* -------------------- 7. SECCIONES GENERALES -------------------- */
+.seccion {
+  padding: 3.5% 0;
+  border-bottom: 1px solid #ddd6c7;
+}
+
+.seccion__titulo {
+  font-size: 1.6em;
+  color: #10131c;
+  margin-bottom: 0.3em;
+  border-left: 0.3em solid #d9a441;
+  padding-left: 0.5em;
+}
+
+.seccion__numero {
+  color: #d9a441;
+  font-weight: 700;
+}
+
+.seccion--alterna {
+  background-color: #ece7d9;
+}
+
+/* -------------------- 8. ARTÍCULOS CON FLOAT + CLEARFIX -------------------- */
+/* Cada <article> combina imagen flotante y texto: técnica clásica
+   de maquetación fluida previa al flexbox/grid. */
+.articulo {
+  margin-top: 1.5em;
+}
+
+.articulo__figura {
+  width: 34%;
+  float: left;
+  margin: 0 3% 1em 0;
+}
+
+.articulo__figura--derecha {
+  float: right;
+  margin: 0 0 1em 3%;
+}
+
+.articulo__cuerpo {
+  width: 100%; /* el texto fluye alrededor de la imagen flotante */
+}
+
+.articulo__cuerpo p {
+  margin-bottom: 0.8em;
+}
+
+figcaption {
+  font-size: 0.78em;
+  color: #55524a;
+  padding: 0.4em 0.2em;
+  background-color: #ece7d9;
+  border: 1px solid #ddd6c7;
+  border-top: none;
+}
+
+/* -------------------- 9. LISTAS DE PUNTOS CLAVE -------------------- */
+.lista-clave {
+  list-style: none;
+  margin: 1em 0;
+}
+
+.lista-clave li {
+  position: relative;
+  padding: 0.4em 0 0.4em 1.6em;
+  border-bottom: 1px dashed #ddd6c7;
+}
+
+.lista-clave li::before {
+  content: "\2726"; /* estrella decorativa, vía CSS, sin JS */
+  position: absolute;
+  left: 0;
+  color: #d9a441;
+}
+
+/* -------------------- 10. TABLA (Física del tiempo) -------------------- */
+.tabla-conceptos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-size: 0.92em;
+}
+
+.tabla-conceptos caption {
+  text-align: left;
+  font-style: italic;
+  margin-bottom: 0.5em;
+  color: #55524a;
+}
+
+.tabla-conceptos th,
+.tabla-conceptos td {
+  border: 1px solid #ddd6c7;
+  padding: 0.7em;
+  text-align: left;
+  width: 33.33%;
+}
+
+.tabla-conceptos th {
+  background-color: #10131c;
+  color: #f4f2ec;
+}
+
+.tabla-conceptos tr:nth-child(even) td {
+  background-color: #ece7d9;
+}
+
+/* -------------------- 11. MULTIMEDIA (video / audio) -------------------- */
+.multimedia__bloque {
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.multimedia__reproductor {
+  width: 100%;
+  background-color: #000;
+}
+
+.multimedia__audio {
+  width: 100%;
+}
+
+/* -------------------- 12. GALERÍA FLUIDA CON INLINE-BLOCK -------------------- */
+.galeria {
+  width: 100%;
+  font-size: 0; /* quita espacios entre inline-block */
+  text-align: left;
+}
+
+.galeria__item {
+  display: inline-block;
+  vertical-align: top;
+  width: 31.33%;
+  margin: 0 3% 3% 0; /* se anula el margen por defecto de <figure> (1em 40px) */
+  font-size: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd6c7;
+}
+
+.galeria__item:nth-child(3n) {
+  margin-right: 0; /* cierra cada fila de 3 columnas proporcionales */
+}
+
+.galeria__item img {
+  width: 100%;
+}
+
+.galeria__texto {
+  padding: 0.6em 0.8em;
+  font-size: 0.85em;
+}
+
+/* -------------------- 13. CITAS DESTACADAS -------------------- */
+.cita {
+  width: 80%;
+  margin: 1.5em auto;
+  padding: 1em 1.5em;
+  border-left: 0.3em solid #d9a441;
+  background-color: #ece7d9;
+  font-style: italic;
+  font-size: 1.05em;
+}
+
+/* -------------------- 14. PIE DE PÁGINA -------------------- */
+.pie {
+  background-color: #10131c;
+  color: #cfcabd;
+  padding: 2.5% 0;
+  font-size: 0.85em;
+}
+
+.pie__columnas {
+  width: 100%;
+}
+
+.pie__columna {
+  display: inline-block;
+  vertical-align: top;
+  width: 48%;
+}
+
+.pie__columna:first-child {
+  margin-right: 2%;
+}
+
+.pie a {
+  color: #d9a441;
+}
+
+.pie__aviso {
+  margin-top: 1.5em;
+  padding-top: 1em;
+  border-top: 1px solid #333a4f;
+  text-align: center;
+  font-size: 0.9em;
+}
